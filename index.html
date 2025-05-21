@@ -1,34 +1,116 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>William Majewski-Wood Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Majewski-Wood | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; margin-bottom: 30px; }
-        h1 { color: #2563eb; }
-        section { margin-bottom: 30px; }
-        .experience { border-left: 3px solid #2563eb; padding-left: 15px; }
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --text: #1f2937;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.8);
+        }
+        
+        .dark-mode {
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --card-bg: rgba(15, 23, 42, 0.8);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+        
+        /* Glassmorphism cards */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.6s forwards;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>William Majewski-Wood</h1>
-        <p>Customer Service Leader | Hospitality Expert</p>
-    </header>
+    <!-- Navigation -->
+    <nav class="card">
+        <div>William Majewski-Wood</div>
+        <button id="themeToggle"><i class="fas fa-moon"></i></button>
+    </nav>
 
-    <section class="experience">
-        <h2>Experience</h2>
-        <h3>CSR Lead - Walgreens (2024-2025)</h3>
-        <ul>
-            <li>✓ Oversaw customer service operations</li>
-            <li>✓ Trained and mentored team members</li>
-        </ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="card animate" style="animation-delay: 0.2s">
+            <h1>William Majewski-Wood</h1>
+            <p>Customer Service Leader | Hospitality Expert</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/Rainfury4u" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:rainfury4u@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="tel:+12192993702"><i class="fas fa-phone"></i></a>
+            </div>
+        </div>
     </section>
 
+    <!-- Experience Timeline -->
     <section>
-        <h2>Contact</h2>
-        <p>Email: rainfury4u@gmail.com</p>
-        <p>Phone: +1 219-299-3702</p>
+        <h2 class="animate">Professional Journey</h2>
+        <div class="timeline">
+            <!-- Walgreens -->
+            <div class="timeline-item card animate" style="animation-delay: 0.4s">
+                <h3>CSR Lead</h3>
+                <h4>Walgreens | 2024-2025</h4>
+                <ul>
+                    <li>✓ Oversaw customer service operations</li>
+                    <li>✓ Trained and mentored team members</li>
+                </ul>
+            </div>
+            
+            <!-- Holiday Inn -->
+            <div class="timeline-item card animate" style="animation-delay: 0.6s">
+                <h3>Night Auditor</h3>
+                <h4>Holiday Inn Express | 2018-2023</h4>
+                <ul>
+                    <li>✓ Managed nightly operations</li>
+                    <li>✓ Improved guest satisfaction</li>
+                </ul>
+            </div>
+        </div>
     </section>
+
+    <script>
+        // Dark mode toggle
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+        
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
