@@ -1,0 +1,27 @@
+{
+  "name": "rainfury4u.github.io",
+  "version": "1.0.0",
+  "description": "Personal portfolio website",
+  "main": "scripts.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i input.css -o styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rainfury4u/rainfury4u.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rainfury4u/rainfury4u.github.io/issues"
+  },
+  "homepage": "https://github.com/rainfury4u/rainfury4u.github.io#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}

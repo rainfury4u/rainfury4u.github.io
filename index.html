@@ -3,169 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>William Majewski-Wood | Customer Service Executive</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>William Majewski-Wood - Portfolio</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --accent: #3b82f6;
-            --text: #1f2937;
-            --light: #f9fafb;
-            --dark: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --card-border: rgba(255, 255, 255, 0.18);
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="styles.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {},
+            },
         }
-
-        [data-theme="dark"] {
-            --text: #e2e8f0;
-            --light: #0f172a;
-            --card-bg: rgba(15, 23, 42, 0.8);
-            --card-border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.8;
-            color: var(--text);
-            background: var(--light);
-            margin: 0;
-            min-height: 100vh;
-            transition: all 0.3s ease;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Glassmorphism Card */
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-            border: 1px solid var(--card-border);
-            padding: 40px;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-        }
-
-        /* Profile Image Fix */
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid var(--primary);
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        /* Contact Form */
-        .contact-form {
-            display: grid;
-            gap: 20px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            background: rgba(255,255,255,0.8);
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <!-- Theme Toggle -->
-        <button id="themeToggle" style="position: fixed; top: 20px; right: 20px; z-index: 100;">
-            <i class="fas fa-moon"></i>
-        </button>
-
-        <!-- Hero Section -->
-        <header class="card">
-            <img src="assets/images/profile.jpg" alt="William Majewski-Wood" class="profile-img"
-                 onerror="this.src='https://via.placeholder.com/180?text=WM-W'">
-            <h1>William Majewski-Wood</h1>
-            <p>Customer Service Executive | Hospitality Professional</p>
-            <div style="margin-top: 20px;">
-                <a href="https://linkedin.com/in/Rainfury4u" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:rainfury4u@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+12192993702" class="social-link"><i class="fas fa-phone"></i></a>
-                <a href="assets/docs/resume.pdf" download class="social-link"><i class="fas fa-file-pdf"></i></a>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="/" class="flex-shrink-0 flex items-center text-xl font-bold text-gray-900">William Majewski-Wood</a>
+                </div>
+                <div class="flex items-center">
+                    <a href="/" class="px-3 py-2 text-gray-700 hover:text-blue-600">Home</a>
+                    <a href="/docs/resume.pdf" class="px-3 py-2 text-gray-700 hover:text-blue-600">Resume</a>
+                </div>
             </div>
-        </header>
+        </div>
+    </nav>
 
-        <!-- Skills Chart -->
-        <section class="card">
-            <h2><i class="fas fa-star"></i> Core Competencies</h2>
-            <div style="height: 400px;">
-                <canvas id="skillsChart"></canvas>
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 p-2 bg-gray-800 text-white rounded-full">
+        Toggle Dark Mode
+    </button>
+
+    <!-- Header -->
+    <header class="bg-white shadow mt-4">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center">
+            <img class="h-16 w-16 rounded-full mr-4" src="/images/profile.jpg" alt="Profile Picture">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">William Majewski-Wood</h1>
+                <p class="text-gray-600">Customer Service & Hospitality Professional</p>
             </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- About Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">About Me</h2>
+            <p class="mt-4 text-gray-600">
+                Customer Service and Hospitality Professional with over 10 years of experience in retail, hotel, and airline industries. Proven leader skilled in team development, customer experience, and process improvement. Recognized for problem-solving, adaptability, and delivering consistent results in fast-paced environments.
+            </p>
+        </section>
+
+        <!-- Skills Section with Chart -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Skills</h2>
+            <canvas id="skillsChart" class="mt-4"></canvas>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Experience</h2>
+            <div class="mt-4">
+                <h3 class="text-lg font-medium">CSR Lead - Walgreens</h3>
+                <p class="text-gray-600">2024 - 2025 | Chicago, IL</p>
+                <ul class="text-gray-600 list-disc ml-5">
+                    <li>Oversaw daily operations of a 20+ person customer service team.</li>
+                    <li>Increased customer satisfaction scores by 30% through efficient resolution workflows.</li>
+                    <li>Trained and mentored 15+ new team members in company service protocols.</li>
+                    <li>Resolved complex software and POS system issues.</li>
+                </ul>
+                <p class="text-gray-600 mt-2"><strong>Skills:</strong> Cash Handling, Upselling, Inventory Management</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-medium">Night Auditor - Holiday Inn Express</h3>
+                <p class="text-gray-600">2018 - 2023 | Chicago, IL</p>
+                <ul class="text-gray-600 list-disc ml-5">
+                    <li>Managed night operations at a 150-room hotel, ensuring smooth guest services and accurate financial auditing.</li>
+                    <li>Scheduled staff, responded to guest concerns, and handled reporting duties.</li>
+                    <li>Automated reporting tasks, saving over 10 hours per week.</li>
+                    <li>Improved guest satisfaction scores through attentive service.</li>
+                </ul>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-medium">Flight Attendant Supervisor - United Airlines</h3>
+                <p class="text-gray-600">2014 - 2015 | Chicago, IL</p>
+                <ul class="text-gray-600 list-disc ml-5">
+                    <li>Led flight crews and ensured compliance with in-flight service standards.</li>
+                    <li>Contributed to the development and testing of mobile and web communication tools.</li>
+                    <li>Participated in code reviews and implemented new features.</li>
+                    <li>Recognized as youngest flight attendant promoted to supervisor.</li>
+                </ul>
+                <p class="text-gray-600 mt-2"><strong>Skills:</strong> Team Leadership, Problem Solving</p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Education</h2>
+            <div class="mt-4">
+                <h3 class="text-lg font-medium">B.S. in General Science - University of Notre Dame</h3>
+                <p class="text-gray-600">2005 - 2009 | GPA: 3.76</p>
+                <p class="text-gray-600">Starting Linebacker, Football Team</p>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Certifications</h2>
+            <div class="mt-4">
+                <h3 class="text-lg font-medium">FFA Aircraft Safety Standard</h3>
+                <p class="text-gray-600">Certified in aircraft safety protocols.</p>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Achievements</h2>
+            <ul class="text-gray-600 list-disc ml-5">
+                <li>Employee of the Month: Recognized for exceptional team performance.</li>
+                <li>Youngest Flight Attendant Promoted: Advanced through roles to Supervisor.</li>
+            </ul>
+        </section>
+
+        <!-- Languages Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Languages</h2>
+            <ul class="text-gray-600 list-disc ml-5">
+                <li>English: Fluent</li>
+                <li>Polish: Conversational</li>
+            </ul>
+        </section>
+
+        <!-- Interests Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Interests</h2>
+            <ul class="text-gray-600 list-disc ml-5">
+                <li>Dogs</li>
+                <li>Working Out</li>
+                <li>Painting</li>
+                <li>Digital Marketing</li>
+                <li>Entrepreneurship</li>
+            </ul>
         </section>
 
         <!-- Contact Form -->
-        <section class="card">
-            <h2><i class="fas fa-envelope"></i> Contact Me</h2>
-            <form class="contact-form" action="https://formsubmit.co/rainfury4u@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                <input type="hidden" name="_next" value="https://rainfury4u.github.io/thanks.html">
-                <button type="submit" style="background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px;">
-                    Send Message
-                </button>
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Contact Me</h2>
+            <form id="contact-form" class="mt-4 space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" class="w-full p-2 border rounded" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full p-2 border rounded" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-gray-700">Message</label>
+                    <textarea id="message" name="message" class="w-full p-2 border rounded" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="p-2 bg-blue-600 text-white rounded hover:bg-blue-700">Send Message</button>
             </form>
+            <p id="form-message" class="mt-2 text-green-600 hidden">Message sent successfully!</p>
         </section>
 
-        <!-- Rest of your content... -->
-    </div>
+        <!-- Resume Download -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-900">Resume</h2>
+            <a href="/docs/resume.pdf" download class="mt-4 inline-block p-2 bg-blue-600 text-white rounded hover:bg-blue-700">Download Resume</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <p class="text-gray-600">© 2025 William Majewski-Wood. All rights reserved.</p>
+            <p class="text-gray-600">
+                <a href="mailto:rainfury4u@gmail.com" class="text-blue-600 hover:underline">rainfury4u@gmail.com</a> |
+                <a href="tel:+17734617447" class="text-blue-600 hover:underline">+1 773-461-7447</a> |
+                <a href="https://www.linkedin.com/in/Rainfury4u/" class="text-blue-600 hover:underline">LinkedIn</a> |
+                <a href="https://github.com/Rainfury4u" class="text-blue-600 hover:underline">GitHub</a>
+            </p>
+        </div>
+    </footer>
 
     <script>
-        // Dark Mode Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.setAttribute('data-theme',
-                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-            themeToggle.innerHTML = document.body.getAttribute('data-theme') === 'dark'
-                ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        // Initialize EmailJS
+        emailjs.init("YOUR_USER_ID");
+
+        // Contact Form Submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            }).then(function() {
+                document.getElementById('form-message').classList.remove('hidden');
+                document.getElementById('contact-form').reset();
+                setTimeout(() => document.getElementById('form-message').classList.add('hidden'), 3000);
+            }, function(error) {
+                alert('Failed to send message: ' + JSON.stringify(error));
+            });
         });
+
+        // Dark Mode Toggle
+        const toggleButton = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        toggleButton.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+        // Respect user preference
+        if (localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
 
         // Skills Chart
         const ctx = document.getElementById('skillsChart').getContext('2d');
         new Chart(ctx, {
-            type: 'radar',
+            type: 'bar',
             data: {
-                labels: ['Customer Service', 'Team Leadership', 'Hospitality', 'Problem Solving', 'Training', 'Operations'],
+                labels: ['Team Leadership', 'Cash Handling', 'Inventory Management', 'Customer Service', 'Problem Solving', 'Upselling'],
                 datasets: [{
-                    label: 'Skill Level',
-                    data: [95, 90, 85, 88, 92, 87],
-                    backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                    borderColor: '#2563eb',
-                    pointBackgroundColor: '#2563eb',
-                    borderWidth: 2
+                    label: 'Proficiency',
+                    data: [90, 85, 80, 95, 90, 85], // Adjust these values as needed
+                    backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
                 }]
             },
             options: {
                 scales: {
-                    r: {
-                        angleLines: { display: true },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
+                    y: { beginAtZero: true, max: 100 }
                 }
             }
-        });
-
-        // Profile image fallback
-        document.querySelector('.profile-img').addEventListener('error', function() {
-            this.src = 'https://via.placeholder.com/180?text=WM-W';
         });
     </script>
 </body>
