@@ -7,6 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -16,15 +20,33 @@
                     colors: {
                         primary: '#1e40af',
                         secondary: '#1e3a8a'
-                    }
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                    },
                 },
             },
         }
     </script>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 font-sans transition-colors duration-200">
+    <!-- Particle Background -->
+    <div id="particles-js" class="fixed inset-0 z-0 opacity-30 dark:opacity-20"></div>
+
     <!-- Navigation Bar -->
-    <nav class="bg-white dark:bg-gray-800 shadow fixed w-full z-50 top-0">
+    <nav class="bg-white/80 dark:bg-gray-800/80 shadow fixed w-full z-50 top-0 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
@@ -51,17 +73,20 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="pt-16"> <!-- Added padding to account for fixed navbar -->
-        <!-- Header -->
-        <header class="bg-white dark:bg-gray-800 shadow mt-4">
+    <div class="pt-16 relative z-10">
+        <!-- Header with Animated Text -->
+        <header class="bg-white/80 dark:bg-gray-800/80 shadow mt-4 backdrop-blur-sm">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="flex items-center">
-                        <img class="h-24 w-24 rounded-full object-cover border-4 border-primary" src="/images/profile.jpg" alt="Profile Picture">
+                        <div class="relative group">
+                            <img class="h-24 w-24 rounded-full object-cover border-4 border-primary transition-transform duration-300 group-hover:scale-105" 
+                                 src="/images/profile.jpg" alt="Profile Picture">
+                            <div class="absolute inset-0 rounded-full bg-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                        </div>
                         <div class="ml-6">
                             <h1 class="text-3xl font-bold text-gray-900 dark:text-white">William Majewski-Wood</h1>
-                            <p class="text-xl text-gray-600 dark:text-gray-300">Customer Service & Hospitality Professional</p>
+                            <p class="text-xl text-gray-600 dark:text-gray-300"><span id="typed-text"></span></p>
                         </div>
                     </div>
                     <div class="mt-6 md:mt-0 flex space-x-4">
@@ -84,56 +109,136 @@
 
         <!-- Main Content -->
         <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <!-- About Section -->
-            <section id="about" class="mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <!-- About Section with Timeline -->
+            <section id="about" class="mb-12 bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm" data-aos="fade-up">
                 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">About Me</h2>
-                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Customer Service and Hospitality Professional with over 10 years of experience in retail, hotel, and airline industries. Proven leader skilled in team development, customer experience, and process improvement. Recognized for problem-solving, adaptability, and delivering consistent results in fast-paced environments.
-                </p>
+                <div class="relative border-l-4 border-primary pl-6 ml-6">
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[34px] bg-primary rounded-full w-4 h-4"></div>
+                        <h3 class="text-lg font-medium text-primary">Present</h3>
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Customer Service and Hospitality Professional with over 10 years of experience...
+                        </p>
+                    </div>
+                    <div class="mb-8 relative">
+                        <div class="absolute -left-[34px] bg-primary rounded-full w-4 h-4"></div>
+                        <h3 class="text-lg font-medium text-primary">2018 - 2023</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Night Auditor at Holiday Inn Express</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-[34px] bg-primary rounded-full w-4 h-4"></div>
+                        <h3 class="text-lg font-medium text-primary">2014 - 2015</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Flight Attendant Supervisor at United Airlines</p>
+                    </div>
+                </div>
             </section>
 
-            <!-- Skills Section with Chart -->
-            <section id="skills" class="mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <!-- Interactive Skills Section -->
+            <section id="skills" class="mb-12 bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm" data-aos="fade-up">
                 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Skills</h2>
-                <div class="relative h-[400px] w-full">
-                    <canvas id="skillsChart"></canvas>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative h-[400px] w-full">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Team Leadership</span>
+                                <span class="text-primary">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Customer Service</span>
+                                <span class="text-primary">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Problem Solving</span>
+                                <span class="text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Communication</span>
+                                <span class="text-primary">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Technical Skills</span>
+                                <span class="text-primary">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-700 dark:text-gray-300">Project Management</span>
+                                <span class="text-primary">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                <div class="bg-primary h-2.5 rounded-full animate-[width] duration-1000" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <!-- Experience Section -->
-            <section id="experience" class="mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <!-- Interactive Experience Timeline -->
+            <section id="experience" class="mb-12 bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm" data-aos="fade-up">
                 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Experience</h2>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium">CSR Lead - Walgreens</h3>
-                    <p class="text-gray-600 dark:text-gray-300">2024 - 2025 | Chicago, IL</p>
-                    <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5">
-                        <li>Oversaw daily operations of a 20+ person customer service team.</li>
-                        <li>Increased customer satisfaction scores by 30% through efficient resolution workflows.</li>
-                        <li>Trained and mentored 15+ new team members in company service protocols.</li>
-                        <li>Resolved complex software and POS system issues.</li>
-                    </ul>
-                    <p class="text-gray-600 dark:text-gray-300 mt-2"><strong>Skills:</strong> Cash Handling, Upselling, Inventory Management</p>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium">Night Auditor - Holiday Inn Express</h3>
-                    <p class="text-gray-600 dark:text-gray-300">2018 - 2023 | Chicago, IL</p>
-                    <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5">
-                        <li>Managed night operations at a 150-room hotel, ensuring smooth guest services and accurate financial auditing.</li>
-                        <li>Scheduled staff, responded to guest concerns, and handled reporting duties.</li>
-                        <li>Automated reporting tasks, saving over 10 hours per week.</li>
-                        <li>Improved guest satisfaction scores through attentive service.</li>
-                    </ul>
-                </div>
-                <div class="mt-4">
-                    <h3 class="text-lg font-medium">Flight Attendant Supervisor - United Airlines</h3>
-                    <p class="text-gray-600 dark:text-gray-300">2014 - 2015 | Chicago, IL</p>
-                    <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5">
-                        <li>Led flight crews and ensured compliance with in-flight service standards.</li>
-                        <li>Contributed to the development and testing of mobile and web communication tools.</li>
-                        <li>Participated in code reviews and implemented new features.</li>
-                        <li>Recognized as youngest flight attendant promoted to supervisor.</li>
-                    </ul>
-                    <p class="text-gray-600 dark:text-gray-300 mt-2"><strong>Skills:</strong> Team Leadership, Problem Solving</p>
+                <div class="space-y-8">
+                    <div class="experience-card transform hover:scale-105 transition-transform duration-300">
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-lg font-medium text-primary">CSR Lead - Walgreens</h3>
+                            <p class="text-gray-600 dark:text-gray-300">2024 - 2025 | Chicago, IL</p>
+                            <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5 mt-2">
+                                <li>Oversaw daily operations of a 20+ person customer service team.</li>
+                                <li>Increased customer satisfaction scores by 30% through efficient resolution workflows.</li>
+                                <li>Trained and mentored 15+ new team members in company service protocols.</li>
+                                <li>Resolved complex software and POS system issues.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="experience-card transform hover:scale-105 transition-transform duration-300">
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-lg font-medium text-primary">Night Auditor - Holiday Inn Express</h3>
+                            <p class="text-gray-600 dark:text-gray-300">2018 - 2023 | Chicago, IL</p>
+                            <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5 mt-2">
+                                <li>Managed night operations at a 150-room hotel, ensuring smooth guest services and accurate financial auditing.</li>
+                                <li>Scheduled staff, responded to guest concerns, and handled reporting duties.</li>
+                                <li>Automated reporting tasks, saving over 10 hours per week.</li>
+                                <li>Improved guest satisfaction scores through attentive service.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="experience-card transform hover:scale-105 transition-transform duration-300">
+                        <div class="border-l-4 border-primary pl-4">
+                            <h3 class="text-lg font-medium text-primary">Flight Attendant Supervisor - United Airlines</h3>
+                            <p class="text-gray-600 dark:text-gray-300">2014 - 2015 | Chicago, IL</p>
+                            <ul class="text-gray-600 dark:text-gray-300 list-disc ml-5 mt-2">
+                                <li>Led flight crews and ensured compliance with in-flight service standards.</li>
+                                <li>Contributed to the development and testing of mobile and web communication tools.</li>
+                                <li>Participated in code reviews and implemented new features.</li>
+                                <li>Recognized as youngest flight attendant promoted to supervisor.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -186,25 +291,40 @@
                 </ul>
             </section>
 
-            <!-- Contact Form -->
-            <section id="contact" class="mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <!-- Interactive Contact Form -->
+            <section id="contact" class="mb-12 bg-white/80 dark:bg-gray-800/80 rounded-lg shadow-lg p-6 backdrop-blur-sm" data-aos="fade-up">
                 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Contact Me</h2>
                 <form id="contact-form" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="form-group">
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                            <input type="text" id="name" name="name" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white 
+                                transform hover:scale-105 transition-transform duration-300" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                            <input type="email" id="email" name="email" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                                transform hover:scale-105 transition-transform duration-300" required>
+                        </div>
                     </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
-                    </div>
-                    <div>
+                    <div class="form-group">
                         <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white" required></textarea>
+                        <textarea id="message" name="message" rows="4" 
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white
+                            transform hover:scale-105 transition-transform duration-300" required></textarea>
                     </div>
-                    <button type="submit" class="w-full md:w-auto px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200">Send Message</button>
+                    <button type="submit" 
+                        class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white rounded-lg 
+                        hover:from-secondary hover:to-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary 
+                        transition-all duration-300 transform hover:scale-105">
+                        Send Message
+                    </button>
                 </form>
-                <p id="form-message" class="mt-4 text-green-600 dark:text-green-400 hidden">Message sent successfully!</p>
+                <div id="form-message" class="mt-4 text-green-600 dark:text-green-400 hidden transform translate-y-4 transition-transform duration-300">
+                    Message sent successfully!
+                </div>
             </section>
 
             <!-- Resume Download -->
@@ -214,15 +334,15 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-white dark:bg-gray-800 shadow">
+        <!-- Footer with Gradient -->
+        <footer class="bg-gradient-to-r from-primary to-secondary text-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-600 dark:text-gray-300">© 2025 William Majewski-Wood. All rights reserved.</p>
+                    <p class="text-white/90">© 2025 William Majewski-Wood. All rights reserved.</p>
                     <div class="mt-4 md:mt-0 space-x-4">
-                        <a href="mailto:rainfury4u@gmail.com" class="text-primary hover:text-secondary">rainfury4u@gmail.com</a>
-                        <span class="text-gray-400">|</span>
-                        <a href="tel:+17734617447" class="text-primary hover:text-secondary">+1 773-461-7447</a>
+                        <a href="mailto:rainfury4u@gmail.com" class="text-white/90 hover:text-white transition-colors duration-200">rainfury4u@gmail.com</a>
+                        <span class="text-white/50">|</span>
+                        <a href="tel:+17734617447" class="text-white/90 hover:text-white transition-colors duration-200">+1 773-461-7447</a>
                     </div>
                 </div>
             </div>
@@ -230,22 +350,103 @@
     </div>
 
     <script>
-        // Initialize EmailJS
-        emailjs.init("YOUR_USER_ID");
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#1e40af' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#1e40af',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    outMode: 'out',
+                    bounce: false,
+                }
+            },
+            interactivity: {
+                detectOn: 'canvas',
+                events: {
+                    onHover: { enable: true, mode: 'repulse' },
+                    onClick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
 
-        // Contact Form Submission
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            mirror: false
+        });
+
+        // Initialize Typed.js
+        new Typed('#typed-text', {
+            strings: [
+                'Customer Service Professional',
+                'Team Leader',
+                'Problem Solver',
+                'Hospitality Expert'
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            backDelay: 2000,
+            loop: true
+        });
+
+        // Existing EmailJS code
+        emailjs.init("YOUR_USER_ID");
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = 'Sending...';
+            submitButton.disabled = true;
+
             emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 message: document.getElementById('message').value
             }).then(function() {
-                document.getElementById('form-message').classList.remove('hidden');
+                const formMessage = document.getElementById('form-message');
+                formMessage.classList.remove('hidden');
+                formMessage.classList.remove('translate-y-4');
                 document.getElementById('contact-form').reset();
-                setTimeout(() => document.getElementById('form-message').classList.add('hidden'), 3000);
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                setTimeout(() => {
+                    formMessage.classList.add('translate-y-4');
+                    setTimeout(() => formMessage.classList.add('hidden'), 300);
+                }, 3000);
             }, function(error) {
                 alert('Failed to send message: ' + JSON.stringify(error));
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
             });
         });
 
@@ -253,81 +454,92 @@
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Change the icons inside the button based on previous settings
         if (localStorage.getItem('theme') === 'dark' ||
             (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
+            document.documentElement.classList.add('dark');
         } else {
             themeToggleDarkIcon.classList.remove('hidden');
         }
 
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        themeToggleBtn.addEventListener('click', function() {
-            // Toggle icons
+        document.getElementById('theme-toggle').addEventListener('click', function() {
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-
-            // Toggle dark mode on html element
             document.documentElement.classList.toggle('dark');
-
-            // Save preference to localStorage
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+            localStorage.setItem('theme', 
+                document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+            updateChartColors();
         });
 
-        // Skills Chart with responsive configuration
-        const ctx = document.getElementById('skillsChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Team Leadership', 'Customer Service', 'Problem Solving', 'Communication', 'Technical Skills', 'Project Management'],
-                datasets: [{
-                    label: 'Proficiency',
-                    data: [90, 95, 85, 88, 80, 85],
-                    backgroundColor: 'rgba(30, 64, 175, 0.2)',
-                    borderColor: 'rgba(30, 64, 175, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(30, 64, 175, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(30, 64, 175, 1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: {
-                            color: 'rgba(128, 128, 128, 0.2)'
-                        },
-                        grid: {
-                            color: 'rgba(128, 128, 128, 0.2)'
-                        },
-                        pointLabels: {
-                            font: {
-                                size: 12
-                            },
-                            color: document.documentElement.classList.contains('dark') ? '#fff' : '#666'
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            max: 100,
-                            stepSize: 20,
-                            color: document.documentElement.classList.contains('dark') ? '#fff' : '#666'
-                        }
-                    }
+        // Enhanced Skills Chart
+        function updateChartColors() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            if (window.skillsChart) {
+                window.skillsChart.destroy();
+            }
+            window.skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Team Leadership', 'Customer Service', 'Problem Solving', 'Communication', 'Technical Skills', 'Project Management'],
+                    datasets: [{
+                        label: 'Proficiency',
+                        data: [90, 95, 85, 88, 80, 85],
+                        backgroundColor: isDark ? 'rgba(30, 64, 175, 0.2)' : 'rgba(30, 64, 175, 0.2)',
+                        borderColor: isDark ? 'rgba(30, 64, 175, 1)' : 'rgba(30, 64, 175, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: isDark ? '#fff' : 'rgba(30, 64, 175, 1)',
+                        pointBorderColor: isDark ? 'rgba(30, 64, 175, 1)' : '#fff',
+                        pointHoverBackgroundColor: isDark ? 'rgba(30, 64, 175, 1)' : '#fff',
+                        pointHoverBorderColor: isDark ? '#fff' : 'rgba(30, 64, 175, 1)'
+                    }]
                 },
-                plugins: {
-                    legend: {
-                        display: false
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: { size: 12 },
+                                color: isDark ? '#fff' : '#666'
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                max: 100,
+                                stepSize: 20,
+                                color: isDark ? '#fff' : '#666',
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
                     }
                 }
-            }
-        });
+            });
+        }
+
+        // Initialize chart with current theme
+        updateChartColors();
+
+        // Intersection Observer for skill bars animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelector('.animate-[width]').style.width = 
+                        entry.target.querySelector('.text-primary').textContent;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.skill-bar').forEach(bar => observer.observe(bar));
     </script>
 </body>
 </html>
