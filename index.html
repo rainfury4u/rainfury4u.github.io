@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>William Majewski-Wood | Portfolio</title>
+    <title>William Majewski-Wood | Professional Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -11,106 +11,78 @@
             --secondary: #1e40af;
             --text: #1f2937;
             --bg: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.9);
         }
-        
-        .dark-mode {
-            --bg: #0f172a;
-            --text: #e2e8f0;
-            --card-bg: rgba(15, 23, 42, 0.8);
-        }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
             background: var(--bg);
             color: var(--text);
-            transition: all 0.3s ease;
         }
-        
-        /* Glassmorphism cards */
+
+        header {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate {
-            animation: fadeIn 0.6s forwards;
+
+        .social-links a {
+            color: var(--primary);
+            font-size: 24px;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="card">
-        <div>William Majewski-Wood</div>
-        <button id="themeToggle"><i class="fas fa-moon"></i></button>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="card animate" style="animation-delay: 0.2s">
-            <h1>William Majewski-Wood</h1>
-            <p>Customer Service Leader | Hospitality Expert</p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/Rainfury4u" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:rainfury4u@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="tel:+12192993702"><i class="fas fa-phone"></i></a>
-            </div>
+    <header>
+        <img src="images/profile.jpg" alt="William Majewski-Wood" class="profile-img">
+        <h1>William Majewski-Wood</h1>
+        <p>Customer Service Leader | Hospitality Professional</p>
+        <div class="social-links">
+            <a href="https://linkedin.com/in/Rainfury4u" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:rainfury4u@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+12192993702"><i class="fas fa-phone"></i></a>
         </div>
+    </header>
+
+    <section class="card">
+        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+        <h3>CSR Lead - Walgreens (2024-2025)</h3>
+        <ul>
+            <li>Oversaw customer service operations for 20+ team members</li>
+            <li>Improved customer satisfaction scores by 30%</li>
+        </ul>
+
+        <h3>Night Auditor - Holiday Inn Express (2018-2023)</h3>
+        <ul>
+            <li>Managed nightly operations for 150-room property</li>
+            <li>Automated reporting systems saving 10+ weekly hours</li>
+        </ul>
     </section>
 
-    <!-- Experience Timeline -->
-    <section>
-        <h2 class="animate">Professional Journey</h2>
-        <div class="timeline">
-            <!-- Walgreens -->
-            <div class="timeline-item card animate" style="animation-delay: 0.4s">
-                <h3>CSR Lead</h3>
-                <h4>Walgreens | 2024-2025</h4>
-                <ul>
-                    <li>✓ Oversaw customer service operations</li>
-                    <li>✓ Trained and mentored team members</li>
-                </ul>
-            </div>
-            
-            <!-- Holiday Inn -->
-            <div class="timeline-item card animate" style="animation-delay: 0.6s">
-                <h3>Night Auditor</h3>
-                <h4>Holiday Inn Express | 2018-2023</h4>
-                <ul>
-                    <li>✓ Managed nightly operations</li>
-                    <li>✓ Improved guest satisfaction</li>
-                </ul>
-            </div>
-        </div>
+    <section class="card">
+        <h2><i class="fas fa-file-pdf"></i> Resume</h2>
+        <a href="docs/resume.pdf" download class="button">Download Full Resume (PDF)</a>
     </section>
-
-    <script>
-        // Dark mode toggle
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-        
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        document.querySelectorAll('.animate').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
